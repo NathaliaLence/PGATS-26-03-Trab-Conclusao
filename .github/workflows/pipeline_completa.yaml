@@ -1,38 +1,58 @@
-name: Pipeline Completa
+# Pipeline de Integração Contínua - Push, Manual e Agendado
 
+# nome da pipeline
+name: Pipeline Completa - Push, Manual e Agendado
+
+# gatilhos / triggers - regras de disparo
 on:
+  # dispara ao fazer push na branch main
   push:
     branches:
       - main
 
+  # execução agendada - todo sábado às 14:15 (horário de Brasília)
   schedule:
     - cron: '15 14 * * 6'
       timezone: 'America/Sao_Paulo'
 
-
+  # execução manual pelo GitHub (Actions > Run workflow)
   workflow_dispatch:
 
+# tarefas dentro da pipeline = jobs
 jobs:
+  # nome do job
   test:
+    # máquina onde o job vai rodar
     runs-on: ubuntu-latest
 
+    # passos do job
     steps:
+      # clone do projeto
       - name: Checkout do código
         uses: actions/checkout@v4
 
+      # instalação do Node.js
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # instalação das dependências
       - name: Instalar dependências
         run: npm ci
 
+      # análise estática do código
+      - name: Executar lint
+        run: npm run lint
+
+      # executar testes e gerar relatório
       - name: Executar testes
         run: npm run test:report
 
+      # salvar relatório como artefato (mesmo se os testes falharem)
       - name: Upload do relatório
         uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
           name: relatorio-testes
           path: reports/

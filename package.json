@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha",
     "test:report": "mocha --reporter mochawesome --reporter-option reportDir=reports,reportFilename=mochawesome,overwrite=true,html=true,json=true"
   },
@@ -15,6 +16,9 @@
     "mocha": "^11.7.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
     "mochawesome": "^7.1.3"
   }
 }
