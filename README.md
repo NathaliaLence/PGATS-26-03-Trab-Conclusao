@@ -33,7 +33,7 @@ Ela roda nos seguintes casos:
 
 1. **Push** — quando há commit na branch `main`
 2. **Manual** — em Actions > Pipeline Completa > Run workflow
-3. **Agendada** — todo sábado às 13:16 UTC (`cron: '18 13 * * 6'`)
+3. **Agendada** — todo sábado às 13:16 UTC (`cron: '21 13 * * 6'`)
 
 ### O que a pipeline faz
 
