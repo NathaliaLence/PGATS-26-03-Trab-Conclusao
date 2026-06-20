@@ -6,7 +6,9 @@ on:
       - main
 
   schedule:
-    - cron: '30 16 * * 6'
+    - cron: '15 14 * * 6'
+      timezone: 'America/Sao_Paulo'
+
 
   workflow_dispatch:
 
