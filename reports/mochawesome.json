@@ -1,0 +1,163 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-06-20T16:05:27.895Z",
+    "end": "2026-06-20T16:05:27.902Z",
+    "duration": 7,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cc41e727-827a-42ff-a34d-ecb6fab04e31",
+      "title": "",
+      "fullFile": "C:\\Users\\naty_\\OneDrive\\Documentos\\MBA\\PGATS-26-03-Trab-Conclusao\\test\\servicoDePagamento.test.js",
+      "file": "\\test\\servicoDePagamento.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4f7a51f9-ce5e-4cab-ab3f-b577a3106d0c",
+          "title": "Validar lista de pagamentos",
+          "fullFile": "C:\\Users\\naty_\\OneDrive\\Documentos\\MBA\\PGATS-26-03-Trab-Conclusao\\test\\servicoDePagamento.test.js",
+          "file": "\\test\\servicoDePagamento.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Adicionar pagamento na lista de pagamentos com valor maior que 100 (Cara)",
+              "fullTitle": "Validar lista de pagamentos Adicionar pagamento na lista de pagamentos com valor maior que 100 (Cara)",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//arrange\nconst servicoDePagamentos = new ServicoDePagamento();\n//act\nservicoDePagamentos.pagar('0987-7656-3475','Samar', 100.1);\nconst pagamento = servicoDePagamentos.consultarUltimoPagamento();\n//assert\nassert.equal(pagamento.codigoBarras, '0987-7656-3475');\nassert.equal(pagamento.empresa, 'Samar');\nassert.equal(pagamento.valor, 100.1);\nassert.equal(pagamento.categoria, 'cara');",
+              "err": {},
+              "uuid": "05ea35cb-4f1f-4195-81c4-30ddf0e7962f",
+              "parentUUID": "4f7a51f9-ce5e-4cab-ab3f-b577a3106d0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Adicionar pagamento na lista de pagamentos com fronteira 100 (Padrão)",
+              "fullTitle": "Validar lista de pagamentos Adicionar pagamento na lista de pagamentos com fronteira 100 (Padrão)",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//arrange\nconst servicoDePagamentos = new ServicoDePagamento();\n//act\nservicoDePagamentos.pagar('0987-7656-3475','Samar', 100);\nconst pagamento = servicoDePagamentos.consultarUltimoPagamento();\n//assert\nassert.equal(pagamento.codigoBarras, '0987-7656-3475');\nassert.equal(pagamento.empresa, 'Samar');\nassert.equal(pagamento.valor, 100);\nassert.equal(pagamento.categoria, 'padrão');",
+              "err": {},
+              "uuid": "230bb0dd-61f9-4b89-ac56-f2a920f9cf6f",
+              "parentUUID": "4f7a51f9-ce5e-4cab-ab3f-b577a3106d0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Adicionar pagamento na lista de pagamentos com valor menor que 100 (Padrão)",
+              "fullTitle": "Validar lista de pagamentos Adicionar pagamento na lista de pagamentos com valor menor que 100 (Padrão)",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//arrange\nconst servicoDePagamentos = new ServicoDePagamento();\n//act\nservicoDePagamentos.pagar('0987-7656-3475','Samar', 99.9);\nconst pagamento = servicoDePagamentos.consultarUltimoPagamento();\n//assert\nassert.equal(pagamento.codigoBarras, '0987-7656-3475');\nassert.equal(pagamento.empresa, 'Samar');\nassert.equal(pagamento.valor, 99.9);\nassert.equal(pagamento.categoria, 'padrão');",
+              "err": {},
+              "uuid": "9681735c-4ff4-4a2e-b0f6-274cd3d55ab0",
+              "parentUUID": "4f7a51f9-ce5e-4cab-ab3f-b577a3106d0c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validar consulta do último pagamento na lista de pagamentos",
+              "fullTitle": "Validar lista de pagamentos Validar consulta do último pagamento na lista de pagamentos",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//arrange\nconst servicoDePagamentos = new ServicoDePagamento();\n//act\nservicoDePagamentos.pagar('3030-1111-3894','Microsoft', 10.5);\nservicoDePagamentos.pagar('4040-2222-4905','OpenAI', 1500);\nservicoDePagamentos.pagar('1234-1234-1234','Google', 0);\nconst pagamento = servicoDePagamentos.consultarUltimoPagamento();\n//assert\nassert.equal(pagamento.codigoBarras, '1234-1234-1234');\nassert.equal(pagamento.empresa, 'Google');\nassert.equal(pagamento.valor, 0);\nassert.equal(pagamento.categoria, 'padrão');",
+              "err": {},
+              "uuid": "c59ad403-e91b-49ec-8b78-c7cf84382566",
+              "parentUUID": "4f7a51f9-ce5e-4cab-ab3f-b577a3106d0c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "05ea35cb-4f1f-4195-81c4-30ddf0e7962f",
+            "230bb0dd-61f9-4b89-ac56-f2a920f9cf6f",
+            "9681735c-4ff4-4a2e-b0f6-274cd3d55ab0",
+            "c59ad403-e91b-49ec-8b78-c7cf84382566"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 5000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 5000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.6"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "mochawesome",
+        "overwrite": "true",
+        "html": "true",
+        "json": "true"
+      },
+      "version": "6.3.2"
+    }
+  }
+}
