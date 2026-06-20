@@ -1,8 +1,5 @@
 name: Pipeline Completa
 
-permissions:
-  contents: read
-
 on:
   push:
     branches:
@@ -12,26 +9,10 @@ on:
     - cron: '0 6 * * 1'
 
   workflow_dispatch:
-    inputs:
-      motivo:
-        description: 'Motivo da execução manual (opcional)'
-        required: false
-        default: 'Execução manual via GitHub Actions'
-
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   test:
-    name: Testes Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [20.x, 22.x]
 
     steps:
       - name: Checkout do código
@@ -40,47 +21,16 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
+          node-version: 20
 
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar testes com geração de relatório
+      - name: Executar testes
         run: npm run test:report
 
-      - name: Publicar resumo dos testes
-        if: always()
-        run: |
-          if [ -f reports/mochawesome.json ]; then
-            PASSES=$(jq -r '.stats.passes' reports/mochawesome.json)
-            FAILURES=$(jq -r '.stats.failures' reports/mochawesome.json)
-            DURATION=$(jq -r '.stats.duration' reports/mochawesome.json)
-            TESTS=$(jq -r '.stats.tests' reports/mochawesome.json)
-
-            {
-              echo "## Resultado dos testes — Node.js ${{ matrix.node-version }}"
-              echo ""
-              echo "| Métrica | Valor |"
-              echo "| --- | --- |"
-              echo "| Total | ${TESTS} |"
-              echo "| Aprovados | ${PASSES} |"
-              echo "| Reprovados | ${FAILURES} |"
-              echo "| Duração (ms) | ${DURATION} |"
-              echo ""
-              echo "Disparo: \`${{ github.event_name }}\`"
-              echo ""
-              echo "O relatório HTML completo está disponível para download nos **artefatos** desta execução."
-            } >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Relatório Mochawesome não encontrado." >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-      - name: Upload do relatório Mochawesome
-        if: always() && hashFiles('reports/**') != ''
+      - name: Upload do relatório
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-testes-node-${{ matrix.node-version }}
+          name: relatorio-testes
           path: reports/
-          retention-days: 30
-          if-no-files-found: warn

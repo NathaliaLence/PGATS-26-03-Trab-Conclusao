@@ -1,18 +1,13 @@
 {
   "name": "pgats-26-03-trab-conclusao",
   "version": "1.0.0",
-  "description": "Serviço de pagamento com testes automatizados e pipeline de integração contínua",
-  "main": "src/servicoDePagamento.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test:report": "mocha --reporter mochawesome --reporter-option reportDir=reports,reportFilename=mochawesome,overwrite=true,html=true,json=true,inlineAssets=true"
+    "test:report": "mocha --reporter mochawesome --reporter-option reportDir=reports,reportFilename=mochawesome,overwrite=true,html=true,json=true"
   },
-  "keywords": [
-    "ci",
-    "github-actions",
-    "mocha",
-    "testes-automatizados"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
